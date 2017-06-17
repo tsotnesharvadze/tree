@@ -1,0 +1,13 @@
+
+/__pycache__/
+*.py[cod]
+*$py.class
+static
+media/cache
+*.sublime-project
+*.sublime-workspace
+.idea
+.vscode
+#db.sqlite3
+nagavi
+trEnv

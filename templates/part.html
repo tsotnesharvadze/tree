@@ -1,0 +1,23 @@
+{% load mytags %}
+<div class="hv-item-children">
+    {% for child in parent.get_children %}
+      
+        <div class="hv-item-child">
+            <!-- Key component -->
+            <div class="hv-item">
+
+                <div class="hv-item-parent">
+                    <div class="person">
+                        {% comment %}<img src="{{ child.image.thumbnail.120x120 }}" alt="">{% endcomment %}
+                        <p class="name">
+                            {{child.get_full_name}} <b> </b>
+                        </p>
+                    </div>
+                </div>
+                {% if child.have_children %}
+                  {% myappend child.pk %}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
