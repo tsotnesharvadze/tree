@@ -6,7 +6,7 @@ class Index(TemplateView):
     template_name = 'index.html'
 
     def get_roots(self):
-        return PersonModel.objects.filter(children=None).first()
+        return PersonModel.objects.filter(parent=None).first()
 
 
     def get_context_data(self, **kwargs):

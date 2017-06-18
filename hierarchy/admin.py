@@ -4,8 +4,7 @@ from .models import PersonModel
 # class PersonModelInline()
 
 class PersonModelAdmin(admin.ModelAdmin):
-    
-    pass
+    search_fields=['name','parent__name']
 
 
 admin.site.register(PersonModel,PersonModelAdmin)

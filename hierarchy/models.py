@@ -16,11 +16,11 @@ class PersonModel(AbsTime):
          ('1',_('კაცი'),))
     name = models.CharField(verbose_name=_('სახელი'),max_length=40,null=True,blank=True)
     lastname = models.CharField(verbose_name=_('გვარი'),max_length=40,null=True,blank=True)
-    sex = models.CharField(verbose_name=_('გვარი'),max_length=1,choices=SEX)
+    sex = models.CharField(verbose_name=_('სქესი'),max_length=1,choices=SEX)
     born_date = models.DateTimeField(_('დაბადების თარიღი'), null = True, blank=True)
     death_date = models.DateTimeField(_('გარდაცვალების თარიღი'), null = True, blank=True)
     wife = models.ForeignKey("PersonModel",verbose_name=_('მეუღლე'),blank=True, null=True,related_name='wife_set')
-    children = models.ForeignKey("PersonModel",verbose_name=_('შვილები'),blank=True, null=True,related_name='children_set')
+    parent = models.ForeignKey("PersonModel",verbose_name=_('მშობელი'),blank=True, null=True,related_name='children_set')
     dossier = RichTextUploadingField(verbose_name='დოსიე',blank=True, null=True)
     image = VersatileImageField(verbose_name='სურათი',blank=True, null=True,upload_to='prof_imgs/',ppoi_field='ppoi')
     ppoi = PPOIField(
@@ -31,6 +31,8 @@ class PersonModel(AbsTime):
         return self.name+' '+self.lastname
 
     def __str__(self):
+        if self.parent:
+            return self.parent.get_full_name()+'>'+self.get_full_name()
         return self.get_full_name()
 
     def have_children(self):
